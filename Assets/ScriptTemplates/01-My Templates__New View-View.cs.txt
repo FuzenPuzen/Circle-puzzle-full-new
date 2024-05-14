@@ -1,0 +1,19 @@
+using Zenject;
+using UnityEngine;
+#NOTRIM#
+public class #SCRIPTNAME# : MonoBehaviour
+{
+#NOTRIM#
+}
+#NOTRIM#
+public class #SCRIPTNAME#Service : IService
+{
+	[Inject] private IViewFabric _viewFabric;
+	private #SCRIPTNAME# _#SCRIPTNAME#;
+    [Inject] private IMarkerService _markerService;
+
+	public void ActivateService()
+	{       
+        _#SCRIPTNAME# = _viewFabric.Init<#SCRIPTNAME#>();
+	}
+}

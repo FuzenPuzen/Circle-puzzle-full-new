@@ -1,0 +1,16 @@
+using Zenject;
+#NOTRIM#
+public interface I#SCRIPTNAME# : IService
+{
+#NOTRIM#
+}
+#NOTRIM#
+public class #SCRIPTNAME# : I#SCRIPTNAME#
+{
+	[Inject] private IServiceFabric _serviceFabric;
+	#NOTRIM#
+	public void ActivateService()
+	{       
+        #NOTRIM#
+	}
+}
