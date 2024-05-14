@@ -23,7 +23,7 @@ public class LineView : MonoBehaviour
     public void SetLineData(LineData lineData)
     {
         _maskImage.sprite = lineData.MaskImage;
-        //_pictireImage.sprite = lineData.PictireImage;
+        _pictireImage.sprite = lineData.PictireImage;
         _startRotation = lineData.StartRotation;
         _maskImage.SetNativeSize();
         transform.rotation = Quaternion.Euler(0, 0, _startRotation);

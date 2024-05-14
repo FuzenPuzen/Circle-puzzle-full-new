@@ -17,6 +17,7 @@ public class SessionInstaller : MonoInstaller
         Container.Bind<IAudioService>().To<AudioService>().AsSingle();
         Container.Bind<IDifficultDataManager>().To<DifficultDataManager>().AsSingle();
         Container.Bind<IDifficultyService>().To<DifficultyService>().AsSingle();
+        Container.Bind<IPicturesDataManager>().To<PicturesDataManager>().AsSingle();
 
         Container.Bind<LineGeneratorService>().AsSingle();
         Container.Bind<RotateLineService>().AsSingle();

@@ -6,6 +6,7 @@ public class LineGeneratorService : IService
 {
 	[Inject] private IServiceFabric _serviceFabric;
     [Inject] private IDifficultyService _difficultyService;
+    [Inject] private IPicturesDataManager _picturesDataManager;
 	private CirclesSOData _circlesSOData;
     private Dictionary<int, Sprite> _lines;
     private List<LineViewService> _lineViewServices = new();
@@ -33,6 +34,7 @@ public class LineGeneratorService : IService
         LineData lineData = new LineData();
         lineData.StartRotation = Random.Range(0, 360);
         lineData.MaskImage = _lines.GetValueOrDefault(i);
+        lineData.PictireImage = _picturesDataManager.GetCurrentPicture();
         return lineData;
     }
 
