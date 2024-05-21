@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 9175664089305063615}
   - component: {fileID: 571402215417692486}
   - component: {fileID: 1184051990189060574}
-  - component: {fileID: 8456232862783580935}
   m_Layer: 5
   m_Name: Pictures Panel
   m_TagString: Untagged
@@ -135,18 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8417e755506054daa4b257aa459dc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8456232862783580935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1566309329037738354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcae99bdb7fa754f917353e8726ab3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5928131128203113205
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +145,7 @@ GameObject:
   - component: {fileID: 5285236108188375968}
   - component: {fileID: 1949284090658429635}
   - component: {fileID: 8080357344760076366}
+  - component: {fileID: 5526290012089197320}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -222,3 +210,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &5526290012089197320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5928131128203113205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fcae99bdb7fa754f917353e8726ab3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

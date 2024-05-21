@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Zenject;
+using ModestTree;
 
 [CreateAssetMenu(fileName = "PicturesSOData", menuName = "PictureSOData")]
 public class PicturesSOData : SerializedScriptableObject
@@ -29,6 +30,7 @@ public class PictureData
 public interface IPicturesDataManager : IService
 {
     public Sprite GetCurrentPicture();
+    public List<PictureData> GetDifficultPictureData(int diffId);
 }
 
 public class PicturesDataManager : IPicturesDataManager
@@ -39,46 +41,43 @@ public class PicturesDataManager : IPicturesDataManager
     private Dictionary<int, Sprite> picturesSprites;
     private int _currentPictureId;
 
-    private List<PictureSLData> _easyPicturesSLData = new();
-    private List<PictureSLData> _mediumPicturesSLData = new();
-    private List<PictureSLData> _hardPicturesSLData = new();
+    private List<List<PictureSLData>> _PicturesSLDatas = new();
 
-    private List<PictureData> _easyPicturesData = new();
-    private List<PictureData> _mediumPicturesData = new();
-    private List<PictureData> _hardPicturesData = new();
+    private List<List<PictureData>> _picturesData = new();
 
-    private const string EasyKey = "EasyKey"; 
-    private const string MediumKey = "MediumKey"; 
-    private const string HardKey = "HardKey"; 
+    private const string PictureDataKey = "PictureDataKey"; 
 
     public void ActivateService()
     {
-        _easyPicturesSLData = _saveService.LoadDatas(_easyPicturesSLData, EasyKey);
-        _mediumPicturesSLData = _saveService.LoadDatas(_mediumPicturesSLData, MediumKey);
-        _hardPicturesSLData = _saveService.LoadDatas(_hardPicturesSLData, HardKey);
+        _PicturesSLDatas = _saveService.LoadDatas(_PicturesSLDatas, PictureDataKey);
 
         var picturesSOData = _soStorageService.GetSOByType<PicturesSOData>() as PicturesSOData;
         picturesSprites = picturesSOData.GetPicturesData();
 
-        if (_easyPicturesSLData.Count != picturesSprites.Count)
+        if (_PicturesSLDatas.IsEmpty())
         {
-            CreateSLData(_easyPicturesSLData, EasyKey);
-            CreateSLData(_mediumPicturesSLData, MediumKey);
-            CreateSLData(_hardPicturesSLData, HardKey);
+            for (int i = 0; i < 3; i++)
+            {
+                _PicturesSLDatas.Add(new List<PictureSLData>());
+                CreateSLData(_PicturesSLDatas[i], PictureDataKey);
+            }
+            _saveService.SaveItem(_PicturesSLDatas, PictureDataKey);
         }
 
-        ComparePictureData(_easyPicturesData, _easyPicturesSLData);
-        ComparePictureData(_mediumPicturesData, _mediumPicturesSLData);
-        ComparePictureData(_hardPicturesData, _hardPicturesSLData);
+        for (int i = 0; i < _PicturesSLDatas.Count; i++)
+        {
+            _picturesData.Add(new List<PictureData>());
+            ComparePictureData(_picturesData[i], _PicturesSLDatas[i]);
+        }
 
         _currentPictureId = 2;
     }
 
     public void CreateSLData(List<PictureSLData> pictureSLDatas, string key)
     {
+        MonoBehaviour.print("CreateSLData");
         foreach (var picturesSprite in picturesSprites)       
-            pictureSLDatas.Add(new PictureSLData());
-        _saveService.SaveItem(pictureSLDatas, key);
+            pictureSLDatas.Add(new PictureSLData());       
     }
 
     public void ComparePictureData(List<PictureData> pictureDatas, List<PictureSLData> pictureSLDatas)
@@ -90,6 +89,8 @@ public class PicturesDataManager : IPicturesDataManager
             pictureDatas[i].PictureSLData = pictureSLDatas[i];
         }
     }
+
+    public List<PictureData> GetDifficultPictureData(int diffId) => _picturesData[diffId];
 
     public Sprite GetCurrentPicture() => picturesSprites[_currentPictureId];
 

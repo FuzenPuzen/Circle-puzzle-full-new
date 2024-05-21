@@ -24,6 +24,7 @@ public class ChoosePanelViewService : IService
         for (int i = 0; i < 3; i++)
         {
             _picturePanelViewServices.Add(_serviceFabric.InitMultiple<PicturePanelViewService>());
+            _picturePanelViewServices[i].SetDifficult(i);
             _picturePanelViewServices[i].ActivateService();
         }
 
