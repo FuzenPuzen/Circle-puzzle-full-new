@@ -16,16 +16,15 @@ public interface IAudioDataManager
 public class AudioDataManager : IAudioDataManager
 {
     private const string AudioKey = "AudioKey";
-    private ISOStorageService _storageService;
+    [Inject] private ISOStorageService _storageService;
+    [Inject] private ILoadService _loadService;
     private AudioSOData _audioSOData;
     private AudioSLData _audioSLData;
     private EventBinding<OnMute> _onMute;
     private EventBinding<OnUnMute> _onUnMute;
 
-    [Inject]
-    public void Constructor(ISOStorageService sOStorageService)
+    public void ActivateService()
     {
-        _storageService = sOStorageService;
         _audioSOData = (AudioSOData)_storageService.GetSOByType<AudioSOData>();
         LoadAudioData();
         _onMute = new(SetMute);
@@ -36,14 +35,14 @@ public class AudioDataManager : IAudioDataManager
     {
         _audioSLData.MusicValue = 0;
         _audioSLData.SoundValue = 0;
-        SaveLoader.SaveItem<AudioSLData>(_audioSLData, AudioKey);
+        _loadService.SaveItem<AudioSLData>(_audioSLData, AudioKey);
     }
 
     public void SetMax()
     {
         _audioSLData.MusicValue = 0.8f;
         _audioSLData.SoundValue = 0.8f;
-        SaveLoader.SaveItem<AudioSLData>(_audioSLData, AudioKey);
+        _loadService.SaveItem<AudioSLData>(_audioSLData, AudioKey);
     }
 
     public AudioClip GetAudioSOData(AudioEnum audioName) => _audioSOData.audioDictionary[audioName];
@@ -53,13 +52,13 @@ public class AudioDataManager : IAudioDataManager
         _audioSLData = audioSLData;
         _audioSLData.MusicValue = Math.Clamp(_audioSLData.MusicValue, 0, 0.8f);
         _audioSLData.SoundValue = Math.Clamp(_audioSLData.SoundValue, 0, 0.8f);
-        SaveLoader.SaveItem<AudioSLData>(_audioSLData, AudioKey);
+        _loadService.SaveItem<AudioSLData>(_audioSLData, AudioKey);
     }
 
     public void LoadAudioData()
     {
         _audioSLData = new();
-        _audioSLData = SaveLoader.LoadData(_audioSLData, AudioKey);      
+        _audioSLData = _loadService.LoadData(_audioSLData, AudioKey);      
     }
 }
 

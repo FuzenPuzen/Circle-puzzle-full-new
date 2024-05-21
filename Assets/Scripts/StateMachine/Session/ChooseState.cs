@@ -7,12 +7,18 @@ public class ChooseState : IBaseState
     [Inject] private IDifficultyService _difficultyService;
     [Inject] private IPicturesDataManager _picturesDataManager;
 
+    [Inject] private ChoosePanelViewService _choosePanelViewService;
+
+
     public void Enter()
     {
         _picturesDataManager.ActivateService();
 
         _difficultDataManager.ActivateService();
         _difficultyService.ActivateService();
+
+        _choosePanelViewService.ActivateService();
+
     }
 
     public void Exit()

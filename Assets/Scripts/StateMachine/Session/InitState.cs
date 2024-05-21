@@ -7,7 +7,6 @@ public class InitState : IBaseState
     [Inject] private GameCanvasViewService _gameCanvasViewService;
     [Inject] private MainCameraViewService _mainCameraViewService;
     [Inject] private IScoreDataManager _scoreDataManager;
-    [Inject] private IRecordDataManager _recordDataManager;
     [Inject] private IAudioService _audioService;
 
 
@@ -18,9 +17,8 @@ public class InitState : IBaseState
         _markerService.ActivateService();
         _gameCanvasViewService.ActivateService();
         _scoreDataManager.ActivateService();
-        _recordDataManager.ActivateService();
         _audioService.ActivateService();
-        _stateMachine.SetState<StartState>();
+        _stateMachine.SetState<ChooseState>();
     }
 
     public void Exit()

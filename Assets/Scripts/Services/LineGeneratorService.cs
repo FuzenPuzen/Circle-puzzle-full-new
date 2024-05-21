@@ -31,10 +31,12 @@ public class LineGeneratorService : IService
 
     private LineData CreateLineData(int i)
     {
-        LineData lineData = new LineData();
-        lineData.StartRotation = Random.Range(0, 360);
-        lineData.MaskImage = _lines.GetValueOrDefault(i);
-        lineData.PictireImage = _picturesDataManager.GetCurrentPicture();
+        LineData lineData = new()
+        {
+            StartRotation = Random.Range(0, 360),
+            MaskImage = _lines.GetValueOrDefault(i),
+            PictireImage = _picturesDataManager.GetCurrentPicture()
+        };
         return lineData;
     }
 

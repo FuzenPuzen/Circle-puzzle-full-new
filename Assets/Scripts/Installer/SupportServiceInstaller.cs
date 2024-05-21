@@ -7,6 +7,14 @@ public class SupportServiceInstaller : MonoInstaller
         Container.Bind<IMarkerService>().To<MarkerService>().AsSingle();
         Container.Bind<ILoaderSceneService>().To<LoaderSceneService>().AsSingle();
 
+#if !UNITY_EDITOR
+            Container.Bind<ILoadService>().To<YSaveService>().AsSingle();
+#else
+        Container.Bind<ILoadService>().To<PrefsLoader>().AsSingle();
+#endif
+
+
+
         Container.Bind(
             typeof(IPrefabStorageService),
             typeof(ISOStorageService)

@@ -8,7 +8,6 @@ public interface IDifficultyService : IService
 
 public class DifficultyService : IDifficultyService
 {
-	[Inject] private IServiceFabric _serviceFabric;
 	[Inject] private ISOStorageService _sOStorageService;
 	[Inject] private IDifficultDataManager _difficultDataManager;
 	
