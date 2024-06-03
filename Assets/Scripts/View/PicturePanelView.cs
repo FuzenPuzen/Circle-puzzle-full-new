@@ -8,6 +8,16 @@ public class PicturePanelView : MonoBehaviour
 	{
 		return transform.GetChild(0);
 	}
+
+    public void HideView()
+    {
+		gameObject.SetActive(false);
+    }
+
+    public void ShowView()
+    {
+		gameObject.SetActive(true);
+    }
 }
 
 public class PicturePanelViewService : IService
@@ -42,4 +52,9 @@ public class PicturePanelViewService : IService
 	{
 		diffId = id;
 	}
+
+	public void HideView() => _PicturePanelView.HideView();
+
+	public void ShowView() => _PicturePanelView.ShowView();
+
 }

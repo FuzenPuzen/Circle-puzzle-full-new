@@ -92,6 +92,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc8d8d2ce991f0545b7872239ba7e9bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _diffButtons:
+  - {fileID: 3534561603085661291}
+  - {fileID: 6792975807435941830}
+  - {fileID: 6690141732070012898}
 --- !u!114 &4254539963104915967
 MonoBehaviour:
   m_ObjectHideFlags: 0
